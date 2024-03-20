@@ -1,7 +1,8 @@
 """UI objects."""
+
 import enum
 import re
-from typing import Literal, Optional, Union
+from typing import Annotated, Literal, Optional, Union
 
 from pydantic import BaseModel, Field, RootModel, field_validator
 
@@ -87,7 +88,7 @@ class UIBase(BaseModel):
     customType: Optional[str] = Field(
         None, description="Optional label for a non-standard expected user interface."
     )
-    condition: ConditionalStatement = Field(
+    condition: Optional[ConditionalStatement] = Field(
         None,
         json_schema_extra={"pattern": "^(inputs|outputs)\.\w+(==|!=|<|>|<=|>=|&&)\w+$"},
         description="Conditional statement that resolves to a boolean value based on UI configuration and selected value, "
@@ -227,3 +228,19 @@ class UIFile(UIBase, extra="forbid"):
         alias="type",
         description="Defines the expected user interface based on a set of basic UI types.",
     )
+
+
+UIItem = Annotated[
+    Union[
+        UIText,
+        UINumber,
+        UICheckbox,
+        UISelect,
+        UIMultiselect,
+        UIColor,
+        UIDatetime,
+        UIPath,
+        UIFile,
+    ],
+    Field(discriminator="ui_type"),
+]

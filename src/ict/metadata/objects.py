@@ -1,4 +1,5 @@
 """Metadata Model."""
+
 import re
 from functools import singledispatchmethod
 from pathlib import Path
@@ -16,7 +17,7 @@ from pydantic import (
 )
 from typing_extensions import Annotated
 
-from ict.version import Version
+from ict.semver import Version
 
 
 class Author(RootModel):
@@ -168,7 +169,9 @@ class Metadata(BaseModel):
     @classmethod
     def check_container(cls, value):
         """Check the container follows the correct format."""
-        if not bool(re.match(r"^[a-zA-Z]*\/{0,1}[a-zA-Z_\-]+:[a-zA-Z0-9_\.]+$", value)):
+        if not bool(
+            re.match(r"^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+:[a-zA-Z0-9_\.\-]+$", value)
+        ):
             raise ValueError(
                 "The name must be in the format <registry path>/<image repository>:<tag>"
             )

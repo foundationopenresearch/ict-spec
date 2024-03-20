@@ -7,11 +7,12 @@ readme = "README.md"
 version = "0.1.0"
 
 [tool.poetry.dependencies]
-pydantic = {extras = ["email"], version = "^2.3"}
 python = ">=3.9,<3.12"
-pyyaml = "^6.0.1"
+cwl-utils = ">=0.30"
 cwltool = "^3.1.20231020140205"
-cwl-utils = "^0.30"
+polus-plugins = {git = "https://github.com/PolusAI/image-tools"}
+pydantic = {extras = ["email"], version = "^2.3"}
+pyyaml = "^6.0.1"
 
 [tool.poetry.group.dev.dependencies]
 hypothesis = "^6.84.3"

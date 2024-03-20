@@ -3,7 +3,7 @@
 import pytest
 from pydantic import ValidationError
 
-from ict.version import Version
+from ict.semver import Version
 
 G = [
     "1.2.3",
