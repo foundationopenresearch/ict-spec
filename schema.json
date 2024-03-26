@@ -206,6 +206,11 @@
           ],
           "title": "Description"
         },
+        "defaultValue": {
+          "type": "any",
+          "default": null,
+          "description": "Optional default value."
+        },
         "required": {
           "description": "Boolean (true/false) value indicating whether this field needs an associated value.",
           "examples": [
