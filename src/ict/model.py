@@ -10,7 +10,7 @@ from typing_extensions import Annotated
 from ict.hardware import HardwareRequirements
 from ict.io import IO
 from ict.metadata import Metadata
-from ict.tools import clt_dict
+from ict.tools import clt_dict, ict_dict
 from ict.ui import (
     UICheckbox,
     UIColor,
@@ -74,6 +74,11 @@ class ICT(Metadata):
     def clt(self) -> dict:
         """CWL CommandLineTool from an ICT object."""
         return clt_dict(self)
+    
+    @property
+    def ict(self) -> dict:
+        """ICT yaml from an ICT object."""
+        return ict_dict(self)
 
     def save_clt(self, cwl_path: StrPath) -> Path:
         """Save the ICT as CommandLineTool to a file."""
@@ -83,3 +88,12 @@ class ICT(Metadata):
         with Path(cwl_path).open("w", encoding="utf-8") as file:
             yaml.dump(self.clt, file)
         return Path(cwl_path)
+
+    def save_ict(self, ict_path: StrPath) -> Path:
+        """Save the ICT as YAML to a file. Useful for when converting CLT->ICT"""
+        assert (
+            str(ict_path).rsplit(".", maxsplit=1)[-1] in ["yml", "yaml"]
+        ), "Path must end in .yml or .yaml"
+        with Path(ict_path).open("w", encoding="utf-8") as file:
+            yaml.dump(self.ict, file)
+        return Path(ict_path)

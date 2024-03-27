@@ -135,6 +135,7 @@ The inputs and outputs section of the ICT specification clearly defines all poss
 | description | Short text description of expected value for field | Algorithm type for thresholding |
 | type | Defines the parameter passed to the ICT tool based on broad categories of [basic types](#types-and-formats) | string |
 | format | Defines the actual value(s) that the input/output parameter represents using an [ontology schema](#ontology) | ['image thresholding'] |
+| defaultValue | Optionally defines the default value for each input/output | true |
 <br>
 
 ## Types and Formats
